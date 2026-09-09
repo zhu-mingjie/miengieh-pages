@@ -48,12 +48,12 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .feature {border-top:1px solid var(--line);padding-top:27px}
 .feature p {margin-bottom:0;font-size:13px}
 .feature-mark {height:32px;width:32px;display:block;margin-bottom:35px;object-fit:contain}
-.how {background:#f6f6f6;border-top:1px solid var(--line)}
+.how {background:#f6f6f6}
 .steps {display:grid;grid-template-columns:repeat(3,1fr);gap:55px;list-style:none;padding:0;margin:65px 0 0}
 .steps li {border-top:1px solid #d3d3d3;padding-top:25px}
 .steps li>span {font-size:var(--text-meta);font-weight:400;color:#707070}
 .steps p {font-size:20px;line-height:1.6;letter-spacing:-.5px;color:#252525;max-width:280px;margin:40px 0 0}
-.privacy {align-items:start}
+.privacy {align-items:start;border-top:1px solid var(--line)}
 .privacy-copy p {font-size:13px;font-weight:400;line-height:1.85;margin:0 0 24px}
 .privacy-copy p:last-child {margin-bottom:0}
 .privacy-copy a {text-decoration:underline;text-underline-offset:4px}
