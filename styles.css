@@ -54,7 +54,7 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .steps li>span {font-size:var(--text-meta);font-weight:400;color:#707070}
 .steps p {font-size:20px;line-height:1.6;letter-spacing:-.5px;color:#252525;max-width:280px;margin:40px 0 0}
 .privacy {align-items:start}
-.privacy-copy p {font-size:18px;font-weight:400;line-height:1.85;margin:0 0 24px}
+.privacy-copy p {font-size:13px;font-weight:400;line-height:1.85;margin:0 0 24px}
 .privacy-copy p:last-child {margin-bottom:0}
 .privacy-copy a {text-decoration:underline;text-underline-offset:4px}
 .privacy-copy a:hover {color:#181818}
@@ -110,7 +110,7 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   .steps li {display:grid;grid-template-columns:36px 1fr;gap:18px;padding-top:25px}
   .steps p {font-size:18px;margin:0;max-width:none}
   .steps li>span {padding-top:5px}
-  .privacy-copy p {font-size:16px}
+  .privacy-copy p {font-size:12px}
   .download {grid-template-columns:1fr;gap:32px}
   .download h2 {font-size:31px}
   .button {padding:17px 18px}
