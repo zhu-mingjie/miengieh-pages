@@ -35,14 +35,14 @@ h1,h2,h3,p {margin-top:0}
 .particle-art canvas {opacity:0}
 .particle-art.ready canvas {opacity:1}
 .particle-art.ready .static-art {visibility:hidden}
-/* All animated density falloff is computed from actual text lines; no fixed white veil. */
+/* The continuous particle field has no text-avoidance mask. */
 .static-art {opacity:.18}
 .eyebrow {font-size:var(--text-label);font-weight:600;letter-spacing:1.7px;line-height:1.6;text-transform:uppercase;margin:0 0 34px;display:flex;align-items:center;gap:10px}
 h2 {font-size:clamp(34px,3.4vw,50px);letter-spacing:-.05em;line-height:1.16;font-weight:600;margin-bottom:0}
 h3 {font-size:18px;letter-spacing:-.5px;font-weight:600;line-height:1.4;margin-bottom:15px}
 p {line-height:1.85;color:var(--muted);font-size:14px}
 .section {padding-block:112px}
-.features {display:grid;grid-template-columns:.95fr 1.5fr;gap:70px}
+.features,.privacy {display:grid;grid-template-columns:.95fr 1.5fr;gap:70px}
 .section-heading .eyebrow {color:#707070;margin-bottom:23px}
 .feature-grid {display:grid;grid-template-columns:1fr 1fr;gap:55px}
 .feature {border-top:1px solid var(--line);padding-top:27px}
@@ -53,12 +53,12 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .steps li {border-top:1px solid #d3d3d3;padding-top:25px}
 .steps li>span {font-size:var(--text-meta);font-weight:400;color:#707070}
 .steps p {font-size:20px;line-height:1.6;letter-spacing:-.5px;color:#252525;max-width:280px;margin:40px 0 0}
-.everyday {text-align:left;padding-block:125px}
-.everyday .eyebrow {justify-content:flex-start;color:#707070;margin-bottom:24px}
-.everyday h2 {font-size:clamp(36px,4.2vw,60px);margin-bottom:45px}
-.everyday-lead {font-size:23px;line-height:1.7;letter-spacing:-.6px;color:#666}
-.everyday-detail {max-width:520px;margin:28px 0 0;font-size:13px}
-.download {border-top:1px solid var(--line);display:grid;grid-template-columns:1.2fr 1fr;gap:120px;align-items:center}
+.privacy {align-items:start}
+.privacy-copy p {font-size:18px;font-weight:400;line-height:1.85;margin:0 0 24px}
+.privacy-copy p:last-child {margin-bottom:0}
+.privacy-copy a {text-decoration:underline;text-underline-offset:4px}
+.privacy-copy a:hover {color:#181818}
+.download {border-top:1px solid var(--line);display:grid;grid-template-columns:1.2fr 1fr;gap:120px;align-items:start}
 .download h2 {font-size:38px;margin-bottom:28px}
 .download .eyebrow {margin-bottom:24px;color:#707070}
 .download-copy>p:not(.eyebrow) {max-width:470px;font-size:13px}
@@ -82,7 +82,7 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
 @media(max-width:1000px) {
   :root {--hero-size:clamp(54px,7.5vw,78px)}
   .hero {padding-block:65px 90px}
-  .features {gap:40px;grid-template-columns:1fr 1.4fr}
+  .features,.privacy {gap:40px;grid-template-columns:1fr 1.4fr}
   .feature-grid {gap:35px}
   .section {padding-block:85px}
   .download {gap:50px}
@@ -99,7 +99,7 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   .hero-description {line-height:1.5;letter-spacing:-.025em}
   .eyebrow {margin-bottom:24px}
   .section {padding-block:70px}
-  .features {display:block}
+  .features,.privacy {display:block}
   .section-heading {margin-bottom:42px}
   .feature-grid {gap:36px 24px}
   .feature {padding-top:20px}
@@ -110,8 +110,7 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   .steps li {display:grid;grid-template-columns:36px 1fr;gap:18px;padding-top:25px}
   .steps p {font-size:18px;margin:0;max-width:none}
   .steps li>span {padding-top:5px}
-  .everyday-lead {font-size:19px}
-  .everyday h2 {margin-bottom:32px}
+  .privacy-copy p {font-size:16px}
   .download {grid-template-columns:1fr;gap:32px}
   .download h2 {font-size:31px}
   .button {padding:17px 18px}
