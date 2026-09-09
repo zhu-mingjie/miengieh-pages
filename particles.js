@@ -29,17 +29,17 @@
     const cols=65,rows=49,field=new Float32Array(cols*rows);
     // Independent swelling eddies: unequal footprints, speeds and curved paths.
     // No shared travelling-wave direction or fixed-size repeating bands.
-    const eddies=Array.from({length:11},(_,i)=>{
+    const eddies=Array.from({length:7},(_,i)=>{
       const phase=i*2.399963,rate=.48+(i%4)*.13;
       const pulse=.5+.5*Math.sin(t*rate+phase);
       return {x:.5+.39*Math.sin(phase+t*(.10+(i%3)*.055))+.08*Math.cos(t*.7+phase),
         y:.5+.36*Math.cos(phase*1.71-t*(.14+(i%4)*.035))+.07*Math.sin(t*.58+phase),
-        rx:.085+(i%3)*.022+pulse*.095,ry:.065+(i%4)*.018+pulse*.075,
+        rx:.13+(i%3)*.025+pulse*.09,ry:.105+(i%4)*.019+pulse*.07,
         angle:phase+Math.sin(t*.36+phase)*1.1,amplitude:.7+pulse*.65};
     });
     function cloud(u,v){
-      const x=u+.024*Math.sin(v*19+t*.73)+.018*Math.cos(u*15-v*11-t*.61);
-      const y=v+.023*Math.cos(u*17-t*.67)+.016*Math.sin(v*21+u*9+t*.81);
+      const x=u+.012*Math.sin(v*10+t*.73)+.008*Math.cos(u*8-v*6-t*.61);
+      const y=v+.012*Math.cos(u*9-t*.67)+.008*Math.sin(v*11+u*5+t*.81);
       let value=0;
       for(const e of eddies){const dx=x-e.x,dy=y-e.y,c=Math.cos(e.angle),s=Math.sin(e.angle);const px=(dx*c+dy*s)/e.rx,py=(-dx*s+dy*c)/e.ry;value+=e.amplitude*Math.exp(-(px*px+py*py)*1.5);}
       return value;
@@ -65,7 +65,7 @@
     }
     // Batch equal grey levels: one fill per shade, not one per particle.
     for(let i=1;i<buckets.length;i++){
-      ctx.fillStyle=`rgba(0,0,0,${i/40})`;ctx.beginPath();const bucket=buckets[i];
+      ctx.fillStyle=`rgba(0,0,0,${i/80})`;ctx.beginPath();const bucket=buckets[i];
       for(let j=0;j<bucket.length;j+=3){ctx.moveTo(bucket[j]+bucket[j+2],bucket[j+1]);ctx.arc(bucket[j],bucket[j+1],bucket[j+2],0,Math.PI*2);}
       ctx.fill();
     }
