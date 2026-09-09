@@ -17,7 +17,7 @@
     // A broad, continuous sheet extending beyond the viewport. Its folds compress
     // and spread the dots, creating rolling density rather than moving flat noise.
     for(let y=-height*.1;y<height*1.1;y+=gap)for(let x=-width*.1;x<width*1.1;x+=gap){
-      points.push({x:x+(random()-.5)*gap*.16,y:y+(random()-.5)*gap*.16,r:.48+random()*.38,tone:Math.floor(15+random()*45),alpha:.76+random()*.22});
+      points.push({x:x+(random()-.5)*gap*.16,y:y+(random()-.5)*gap*.16,r:.72,tone:25,alpha:.92});
     }
     draw();
   }
@@ -31,16 +31,16 @@
     const scale=Math.min(width,1300),edge=Math.min(SETTINGS.edgeFade,width*.22,height*.24);
     for(const p of points){
       const u=p.x/width,v=p.y/height;
-      const a=u*7.6+v*2.8-t,b=v*8.4-u*3.2+t*.73;
+      const a=u*17.5+v*6.4-t,b=v*19.3-u*7.4+t*.73;
       const fold=Math.sin(a+Math.sin(b)*.75),cross=Math.cos(b+Math.cos(a)*.55);
-      const x=p.x+scale*.022*cross+scale*.012*Math.sin(v*5.7+t*.61);
-      const y=p.y+height*.035*fold+height*.018*Math.sin(u*11-v*4+t*.84);
+      const x=p.x+scale*.0095*cross+scale*.0052*Math.sin(v*13.1+t*.61);
+      const y=p.y+height*.0152*fold+height*.0078*Math.sin(u*25.3-v*9.2+t*.84);
       if(x<0||x>width||y<0||y>height)continue;
       const crest=Math.pow((Math.sin(a+cross*.8)+1)*.5,.85);
       const fade=smooth(x/edge)*smooth((width-x)/edge)*smooth(y/edge)*smooth((height-y)/edge);
       const alpha=p.alpha*(.1+.9*crest)*fade;
       const shade=Math.round(alpha*(1-p.tone/255)*40);
-      if(shade>0)buckets[Math.min(31,shade)].push(x,y,p.r*(.48+crest*1.35));
+      if(shade>0)buckets[Math.min(31,shade)].push(x,y,p.r*(.12+crest*1.55)*Math.sqrt(fade));
     }
     // Batch equal grey levels: one fill per shade, not one per particle.
     for(let i=1;i<buckets.length;i++){
