@@ -48,7 +48,7 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .feature {border-top:1px solid var(--line);padding-top:27px}
 .feature p {margin-bottom:0;font-size:13px}
 .feature-mark {height:32px;width:32px;display:block;margin-bottom:35px;object-fit:contain}
-.how {background:#f6f6f6}
+.how {background:#f6f6f6;border-top:1px solid var(--line)}
 .steps {display:grid;grid-template-columns:repeat(3,1fr);gap:55px;list-style:none;padding:0;margin:65px 0 0}
 .steps li {border-top:1px solid #d3d3d3;padding-top:25px}
 .steps li>span {font-size:var(--text-meta);font-weight:400;color:#707070}
@@ -58,7 +58,7 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .privacy-copy p:last-child {margin-bottom:0}
 .privacy-copy a {text-decoration:underline;text-underline-offset:4px}
 .privacy-copy a:hover {color:#181818}
-.download {border-top:1px solid var(--line);display:grid;grid-template-columns:1.2fr 1fr;gap:120px;align-items:start}
+.download {display:grid;grid-template-columns:1.2fr 1fr;gap:120px;align-items:start}
 .download h2 {font-size:38px;margin-bottom:28px}
 .download .eyebrow {margin-bottom:24px;color:#707070}
 .download-copy>p:not(.eyebrow) {max-width:470px;font-size:13px}
