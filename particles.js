@@ -27,10 +27,26 @@
     // Continuous water-ripple field, with its lower half left transparent;
     // the rest remains completely transparent, including the background tint.
     const cols=65,rows=49,field=new Float32Array(cols*rows);
-    function cloud(u,v){const a=u*17.5+v*6.4-t,b=v*19.3-u*7.4+t*.73;const cross=Math.cos(b+Math.cos(a)*.55);return Math.sin(a+cross*.8);}
+    // Independent swelling eddies: unequal footprints, speeds and curved paths.
+    // No shared travelling-wave direction or fixed-size repeating bands.
+    const eddies=Array.from({length:11},(_,i)=>{
+      const phase=i*2.399963,rate=.48+(i%4)*.13;
+      const pulse=.5+.5*Math.sin(t*rate+phase);
+      return {x:.5+.39*Math.sin(phase+t*(.10+(i%3)*.055))+.08*Math.cos(t*.7+phase),
+        y:.5+.36*Math.cos(phase*1.71-t*(.14+(i%4)*.035))+.07*Math.sin(t*.58+phase),
+        rx:.085+(i%3)*.022+pulse*.095,ry:.065+(i%4)*.018+pulse*.075,
+        angle:phase+Math.sin(t*.36+phase)*1.1,amplitude:.7+pulse*.65};
+    });
+    function cloud(u,v){
+      const x=u+.024*Math.sin(v*19+t*.73)+.018*Math.cos(u*15-v*11-t*.61);
+      const y=v+.023*Math.cos(u*17-t*.67)+.016*Math.sin(v*21+u*9+t*.81);
+      let value=0;
+      for(const e of eddies){const dx=x-e.x,dy=y-e.y,c=Math.cos(e.angle),s=Math.sin(e.angle);const px=(dx*c+dy*s)/e.rx,py=(-dx*s+dy*c)/e.ry;value+=e.amplitude*Math.exp(-(px*px+py*py)*1.5);}
+      return value;
+    }
     for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)field[j*cols+i]=cloud(i/(cols-1),j/(rows-1));
     const sorted=Array.from(field).sort((a,b)=>a-b),threshold=sorted[Math.floor(sorted.length*SETTINGS.blankFraction)];
-    function density(x,y){const gx=Math.min(cols-1.001,Math.max(0,x/width*(cols-1))),gy=Math.min(rows-1.001,Math.max(0,y/height*(rows-1)));const i=Math.floor(gx),j=Math.floor(gy),u=gx-i,v=gy-j,k=j*cols+i;const value=(field[k]*(1-u)+field[k+1]*u)*(1-v)+(field[k+cols]*(1-u)+field[k+cols+1]*u)*v;return smooth((value-threshold)/.9);}
+    function density(x,y){const gx=Math.min(cols-1.001,Math.max(0,x/width*(cols-1))),gy=Math.min(rows-1.001,Math.max(0,y/height*(rows-1)));const i=Math.floor(gx),j=Math.floor(gy),u=gx-i,v=gy-j,k=j*cols+i;const value=(field[k]*(1-u)+field[k+1]*u)*(1-v)+(field[k+cols]*(1-u)+field[k+cols+1]*u)*v;return smooth((value-threshold)/.65);}
     for(const bucket of buckets)bucket.length=0;
     const scale=Math.min(width,1300),edge=Math.min(SETTINGS.edgeFade,width*.22,height*.24);
     for(const p of points){
