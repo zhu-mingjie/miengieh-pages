@@ -1,7 +1,7 @@
 /* Continuous monochrome particle swells. No document shapes or text masks. */
 (() => {
   'use strict';
-  const SETTINGS = Object.freeze({spacing:3.5,mobileSpacing:3,dpr:1.5,mobileDpr:1.3,fps:40,mobileFps:30,edgeFade:160,speed:.65,blankFraction:.66});
+  const SETTINGS = Object.freeze({spacing:3.5,mobileSpacing:3,dpr:1.5,mobileDpr:1.3,fps:40,mobileFps:30,edgeFade:160,speed:.65,blankFraction:.5});
   const art=document.querySelector('.particle-art'),canvas=document.querySelector('#particles');
   const ctx=canvas.getContext('2d');if(!ctx)return;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -17,20 +17,20 @@
     // A broad, continuous sheet extending beyond the viewport. Its folds compress
     // and spread the dots, creating rolling density rather than moving flat noise.
     for(let y=-height*.1;y<height*1.1;y+=gap)for(let x=-width*.1;x<width*1.1;x+=gap){
-      points.push({x:x+(random()-.5)*gap*.9,y:y+(random()-.5)*gap*.9,r:.72,tone:25,alpha:.92});
+      points.push({x:x+(random()-.5)*gap*.16,y:y+(random()-.5)*gap*.16,r:.72,tone:25,alpha:.92});
     }
     draw();
   }
   function draw(){
     const t=reduced.matches?0:elapsed*SETTINGS.speed;
     ctx.clearRect(0,0,width,height);art.dataset.phase='continuous-swells';
-    // Moving organic density field. Its upper third forms diffuse clouds;
+    // Continuous water-ripple field, with its lower half left transparent;
     // the rest remains completely transparent, including the background tint.
     const cols=65,rows=49,field=new Float32Array(cols*rows);
-    function cloud(u,v){return Math.sin(u*13+Math.sin(v*9+t*.47)*1.8+t*.8)+.65*Math.cos(v*16+Math.sin(u*8-t*.6)*1.6-t*.7)+.28*Math.sin(u*27+v*21+t*1.1);}
+    function cloud(u,v){const a=u*17.5+v*6.4-t,b=v*19.3-u*7.4+t*.73;const cross=Math.cos(b+Math.cos(a)*.55);return Math.sin(a+cross*.8);}
     for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)field[j*cols+i]=cloud(i/(cols-1),j/(rows-1));
     const sorted=Array.from(field).sort((a,b)=>a-b),threshold=sorted[Math.floor(sorted.length*SETTINGS.blankFraction)];
-    function density(x,y){const gx=Math.min(cols-1.001,Math.max(0,x/width*(cols-1))),gy=Math.min(rows-1.001,Math.max(0,y/height*(rows-1)));const i=Math.floor(gx),j=Math.floor(gy),u=gx-i,v=gy-j,k=j*cols+i;const value=(field[k]*(1-u)+field[k+1]*u)*(1-v)+(field[k+cols]*(1-u)+field[k+cols+1]*u)*v;return smooth((value-threshold)/.85);}
+    function density(x,y){const gx=Math.min(cols-1.001,Math.max(0,x/width*(cols-1))),gy=Math.min(rows-1.001,Math.max(0,y/height*(rows-1)));const i=Math.floor(gx),j=Math.floor(gy),u=gx-i,v=gy-j,k=j*cols+i;const value=(field[k]*(1-u)+field[k+1]*u)*(1-v)+(field[k+cols]*(1-u)+field[k+cols+1]*u)*v;return smooth((value-threshold)/.9);}
     for(const bucket of buckets)bucket.length=0;
     const scale=Math.min(width,1300),edge=Math.min(SETTINGS.edgeFade,width*.22,height*.24);
     for(const p of points){
