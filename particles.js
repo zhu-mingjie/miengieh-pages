@@ -1,7 +1,7 @@
 /* Continuous monochrome particle swells. No document shapes or text masks. */
 (() => {
   'use strict';
-  const SETTINGS = Object.freeze({spacing:4,mobileSpacing:3.4,dpr:1.5,mobileDpr:1.3,fps:40,mobileFps:30,edgeFade:160});
+  const SETTINGS = Object.freeze({spacing:3.5,mobileSpacing:3,dpr:1.5,mobileDpr:1.3,fps:40,mobileFps:30,edgeFade:160});
   const art=document.querySelector('.particle-art'),canvas=document.querySelector('#particles');
   const ctx=canvas.getContext('2d');if(!ctx)return;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -17,7 +17,7 @@
     // A broad, continuous sheet extending beyond the viewport. Its folds compress
     // and spread the dots, creating rolling density rather than moving flat noise.
     for(let y=-height*.1;y<height*1.1;y+=gap)for(let x=-width*.1;x<width*1.1;x+=gap){
-      points.push({x:x+(random()-.5)*gap*.16,y:y+(random()-.5)*gap*.16,r:.38+random()*.32,tone:Math.floor(15+random()*45),alpha:.52+random()*.3});
+      points.push({x:x+(random()-.5)*gap*.16,y:y+(random()-.5)*gap*.16,r:.48+random()*.38,tone:Math.floor(15+random()*45),alpha:.76+random()*.22});
     }
     draw();
   }
@@ -25,7 +25,7 @@
     const t=reduced.matches?0:elapsed*.18;
     ctx.clearRect(0,0,width,height);art.dataset.phase='continuous-swells';
     const ground=ctx.createRadialGradient(width*.5,height*.5,0,width*.5,height*.5,Math.max(width,height)*.62);
-    ground.addColorStop(0,'rgba(224,225,224,.50)');ground.addColorStop(.65,'rgba(236,237,236,.26)');ground.addColorStop(1,'rgba(255,255,255,0)');
+    ground.addColorStop(0,'rgba(219,220,219,.65)');ground.addColorStop(.65,'rgba(231,232,231,.36)');ground.addColorStop(1,'rgba(255,255,255,0)');
     ctx.fillStyle=ground;ctx.fillRect(0,0,width,height);
     for(const bucket of buckets)bucket.length=0;
     const scale=Math.min(width,1300),edge=Math.min(SETTINGS.edgeFade,width*.22,height*.24);
@@ -36,11 +36,11 @@
       const x=p.x+scale*.022*cross+scale*.012*Math.sin(v*5.7+t*.61);
       const y=p.y+height*.035*fold+height*.018*Math.sin(u*11-v*4+t*.84);
       if(x<0||x>width||y<0||y>height)continue;
-      const crest=Math.pow((Math.sin(a+cross*.8)+1)*.5,1.35);
+      const crest=Math.pow((Math.sin(a+cross*.8)+1)*.5,.85);
       const fade=smooth(x/edge)*smooth((width-x)/edge)*smooth(y/edge)*smooth((height-y)/edge);
-      const alpha=p.alpha*(.06+.94*crest)*fade;
+      const alpha=p.alpha*(.1+.9*crest)*fade;
       const shade=Math.round(alpha*(1-p.tone/255)*40);
-      if(shade>0)buckets[Math.min(31,shade)].push(x,y,p.r*(.5+crest*1.05));
+      if(shade>0)buckets[Math.min(31,shade)].push(x,y,p.r*(.48+crest*1.35));
     }
     // Batch equal grey levels: one fill per shade, not one per particle.
     for(let i=1;i<buckets.length;i++){
