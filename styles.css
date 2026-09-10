@@ -126,4 +126,5 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
 /* Desktop section headings: 90% of the original responsive size. */
 @media(min-width:1001px) {
   #features-title,#privacy-title,#how-title {font-size:clamp(30.6px,3.06vw,45px)}
+  #download-title {font-size:34.2px}
 }
