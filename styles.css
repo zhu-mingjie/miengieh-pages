@@ -122,18 +122,20 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   *,*:before,*:after {animation:none!important;transition:none!important}
 }
 
-/* Desktop headings use whole-pixel sizes, including fluid interpolation. */
+/* One cross-device ratio, derived from the wide-desktop 34px / 45px reference.
+   Integer fallbacks also preserve the rounded ratio on older browsers. */
+:root {--section-title-size:34px;--download-title-size:26px}
 @media(min-width:1001px) {
-  #features-title,#privacy-title,#how-title {font-size:45px;font-size:round(nearest,clamp(31px,3.06vw,45px),1px)}
-  #download-title {font-size:34px}
-}
-
-/* Each smaller-screen tier shares one whole-pixel section-heading size. */
-@media(min-width:601px) and (max-width:1000px) {
-  #features-title,#privacy-title,#how-title {font-size:34px}
-  #download-title {font-size:27px}
+  :root {--section-title-size:45px;--download-title-size:34px}
+  @supports(font-size:round(nearest,1px,1px)) {
+    :root {--section-title-size:round(nearest,clamp(31px,3.06vw,45px),1px)}
+  }
 }
 @media(max-width:600px) {
-  #features-title,#privacy-title,#how-title {font-size:30px}
-  #download-title {font-size:24px}
+  :root {--section-title-size:30px;--download-title-size:23px}
+}
+#features-title,#privacy-title,#how-title {font-size:var(--section-title-size)}
+#download-title {font-size:var(--download-title-size)}
+@supports(font-size:round(nearest,1px,1px)) {
+  #download-title {font-size:round(nearest,calc(var(--section-title-size) * 34 / 45),1px)}
 }
