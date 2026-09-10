@@ -59,7 +59,7 @@ p {line-height:1.85;color:var(--muted);font-size:14px}
 .privacy-copy a {text-decoration:underline;text-underline-offset:4px}
 .privacy-copy a:hover {color:#181818}
 .download {display:grid;grid-template-columns:1.2fr 1fr;gap:120px;align-items:start}
-.download h2 {font-size:38px;margin-bottom:28px}
+.download h2 {margin-bottom:28px}
 .download .eyebrow {margin-bottom:24px;color:#707070}
 .download-copy>p:not(.eyebrow) {max-width:470px;font-size:13px}
 .download-copy .open-source {margin:22px 0 0;color:#707070}
@@ -112,7 +112,6 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   .steps li>span {padding-top:5px}
   .privacy-copy p {font-size:12px}
   .download {grid-template-columns:1fr;gap:32px}
-  .download h2 {font-size:31px}
   .button {padding:17px 18px}
   footer {padding-block:28px}
   footer .logo,footer .logo img {width:100px}
