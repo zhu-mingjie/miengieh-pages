@@ -122,20 +122,20 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   *,*:before,*:after {animation:none!important;transition:none!important}
 }
 
-/* One cross-device ratio, derived from the wide-desktop 34px / 45px reference.
+/* One cross-device ratio, 85% of the shared section-heading size.
    Integer fallbacks also preserve the rounded ratio on older browsers. */
-:root {--section-title-size:34px;--download-title-size:26px}
+:root {--section-title-size:34px;--download-title-size:29px}
 @media(min-width:1001px) {
-  :root {--section-title-size:45px;--download-title-size:34px}
+  :root {--section-title-size:45px;--download-title-size:38px}
   @supports(font-size:round(nearest,1px,1px)) {
     :root {--section-title-size:round(nearest,clamp(31px,3.06vw,45px),1px)}
   }
 }
 @media(max-width:600px) {
-  :root {--section-title-size:30px;--download-title-size:23px}
+  :root {--section-title-size:30px;--download-title-size:26px}
 }
 #features-title,#privacy-title,#how-title {font-size:var(--section-title-size)}
 #download-title {font-size:var(--download-title-size)}
 @supports(font-size:round(nearest,1px,1px)) {
-  #download-title {font-size:round(nearest,calc(var(--section-title-size) * 34 / 45),1px)}
+  #download-title {font-size:round(nearest,calc(var(--section-title-size) * .85),1px)}
 }
