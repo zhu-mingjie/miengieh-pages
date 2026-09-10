@@ -127,3 +127,11 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   #features-title,#privacy-title,#how-title {font-size:45px;font-size:round(nearest,clamp(31px,3.06vw,45px),1px)}
   #download-title {font-size:34px}
 }
+
+/* Each smaller-screen tier shares one whole-pixel section-heading size. */
+@media(min-width:601px) and (max-width:1000px) {
+  #features-title,#privacy-title,#how-title,#download-title {font-size:34px}
+}
+@media(max-width:600px) {
+  #features-title,#privacy-title,#how-title,#download-title {font-size:30px}
+}
