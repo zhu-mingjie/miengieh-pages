@@ -123,8 +123,8 @@ footer>span {font-size:var(--text-small);font-weight:400;color:#707070}
   *,*:before,*:after {animation:none!important;transition:none!important}
 }
 
-/* Desktop section headings: 90% of the original responsive size. */
+/* Desktop headings use whole-pixel sizes, including fluid interpolation. */
 @media(min-width:1001px) {
-  #features-title,#privacy-title,#how-title {font-size:clamp(30.6px,3.06vw,45px)}
-  #download-title {font-size:34.2px}
+  #features-title,#privacy-title,#how-title {font-size:45px;font-size:round(nearest,clamp(31px,3.06vw,45px),1px)}
+  #download-title {font-size:34px}
 }
